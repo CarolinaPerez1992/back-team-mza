@@ -48,6 +48,29 @@ const controller = {
             })
         }
     },
+    readOnlyOne: async(req,res) => {
+        let id = req.params.id;
+        try {
+            let city = await City.findOne({ _id: id }).populate({ path: 'userId', select: 'name photo -_id'});
+            if (city) {
+                res.status(200).json({
+                    response: city,
+                    success: true,
+                    message: "found city"
+                })
+            } else {
+                res.status(404).json({
+                    success: false,
+                    message: "no city obtained"
+                })
+            }
+        } catch(error) {
+            res.status(400).json({
+                success: false,
+                message: error.message
+            })
+        }
+    },
 }
 
 module.exports = controller;
