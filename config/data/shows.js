@@ -44,7 +44,7 @@ let shows = [
     userId: "636e78ac2ebb17b28fb470a2",
   },
   {
-    hotelId: "63702ff85ef69e08afc128e0",
+    hotelId: "63726ec34850a62e2bd076f1",
     name: "Taylor Swift",
     description:
       "Exploring Lanzarote's volcanoes without a guide may risk missing the best sights and gaining only a sketchy ",
@@ -55,7 +55,7 @@ let shows = [
     userId: "636e78d32ebb17b28fb470a4",
   },
   {
-    hotelId: "63702ff85ef69e08afc128e0",
+    hotelId: "63726ec34850a62e2bd076f1",
     name: "Fuerza Bruta",
     description:
       "Exploring Lanzarote's volcanoes without a guide may risk missing the best sights and gaining only a sketchy ",
