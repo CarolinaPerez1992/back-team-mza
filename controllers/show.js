@@ -8,7 +8,7 @@ const controller = {
       res.status(201).json({
         id: new_show._id,
         success: true,
-        message: "User created successfully",
+        message: "User created successfully.",
       });
     } catch (error) {
       res.status(400).json({
