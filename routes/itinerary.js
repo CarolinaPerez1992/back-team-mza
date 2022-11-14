@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const {create, readItineraries, destroy} = require('../controllers/itinerary')
-
+const {create, readItineraries, update} = require('../controllers/itinerary')
 router.get('/', readItineraries)
 router.post('/', create)
-router.delete('/:id', destroy)
+router.put('/:id', update)
+
 module.exports = router;
