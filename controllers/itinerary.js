@@ -54,20 +54,30 @@ const controller = {
                 res.status(200).json({
                     success: true,
                     message: "The itinerary was successfully modified"
+
                 })
             } else {
                 res.status(404).json({
                     success: false,
-                    message: "There is no itinerary that matches"
+                    message: "there are no matching itineraries"
+
                 })
             }
-        } catch(error) {
+        } 
+        },
+        destroy: async(req,res) => { 
+        let { id } = req.params
+        try {
+            let itinerary = await Itinerary.findOneAndDelete({ _id: id })
+            if (itinerary) {
+                res.status(200).json({
+                    success: true,
+                    message: "the itinerary is removed"
+    } catch(error) {
             res.status(400).json({
                 success: false,
                 message: error.message
             })
-        }
-    },
 }
-
+}
 module.exports = controller;
