@@ -1,10 +1,9 @@
 const Show = require("../models/show");
-const show = require("../models/show");
 
 const controller = {
   create: async (req, res) => {
     try {
-      let new_show = await show.create(req.body);
+      let new_show = await Show.create(req.body);
       res.status(201).json({
         id: new_show._id,
         success: true,
