@@ -29,14 +29,25 @@ const controller = {
     if (req.query.order) {
       order = { capacity: req.query.order };
     }
+    if (req.query.userId) {
+      query = { userId: req.query.userId };
+    }
     try {
       let get_hotel = await Hotel.find(query).sort(order);
-      res.status(200).json({
-        id: get_hotel._id,
-        data: get_hotel,
-        success: true,
-        message: "Hotel read successfully",
-      });
+      if (get_hotel.length > 0) {
+        res.status(200).json({
+          id: get_hotel._id,
+          data: get_hotel,
+          success: true,
+          message: "Hotel read successfully",
+        });
+      } else {
+        res.status(404).json({
+          success: false,
+          message: "hotels not found",
+          response: [],
+        });
+      }
     } catch (error) {
       res.status(400).json({
         success: false,
