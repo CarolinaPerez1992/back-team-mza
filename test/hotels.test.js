@@ -29,7 +29,7 @@ describe("hotels", function (done) {
           userId: "636e67886d5bdab4b6f1716b",
         })
         .expect((res) => {
-          assert.isNumber(res.body.new_hotel.capacity);
+          assert.isNumber(res.body.data.capacity);
         })
         .end(function (err, res) {
           if (err) {
