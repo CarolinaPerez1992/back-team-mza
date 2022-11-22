@@ -25,6 +25,9 @@ const controller = {
         if(req.query.continent){
             query = { continent: req.query.continent}
         }
+        if (req.query.userId) {
+            query = { userId: req.query.userId };
+        }
         if(req.query.name){
             query = {
                 ...query, 
@@ -33,7 +36,7 @@ const controller = {
         }
 
         try {         
-            let get_city = await City.find(query);
+            let get_city = await City.find(query).populate({path:'userId', select:'role -_id'});
             res.status(200).json(
                 {
                 id: get_city._id,
