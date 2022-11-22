@@ -22,8 +22,14 @@ const controller = {
     if (req.query.hotelId) {
       query = { hotelId: req.query.hotelId };
     }
+    if (req.query.userId) {
+      query = { userId: req.query.userId };
+    }
     try {
-      let shows = await Show.find(query);
+      let shows = await Show.find(query).populate({
+        path: "userId",
+        select: "role -_id",
+      });
       if (shows) {
         res.status(200).json({
           success: true,
