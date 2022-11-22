@@ -7,8 +7,11 @@ const controller = {
     if (req.query.citiId) {
       query = { citiId: req.query.citiId };
     }
+    if (req.query.userId) {
+      query = { userId: req.query.userId };
+  }
     try {
-      let itineraries = await Itinerary.find(query);
+      let itineraries = await Itinerary.find(query).populate({path:'userId', select:'role -_id'});;
       if (itineraries) {
         res.status(200).json({
           success: true,

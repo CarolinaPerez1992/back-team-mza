@@ -1,3 +1,4 @@
+const { faCity } = require('@fortawesome/free-solid-svg-icons');
 const City = require('../models/City');
 
 const controller = {
@@ -37,6 +38,7 @@ const controller = {
 
         try {         
             let get_city = await City.find(query).populate({path:'userId', select:'role -_id'});
+            if(get_city.length>0){
             res.status(200).json(
                 {
                 id: get_city._id,
@@ -44,7 +46,16 @@ const controller = {
                 success: true,
                 message: 'City read successfully'
                 }
-            )
+            )}else{
+                res.status(404).json(
+                    { 
+                        success: false,
+                        message: 'no cities found',
+                        data: []    
+                    }
+                )
+            }
+        
         } catch (error) {
             res.status(400).json({
                 success: false,
@@ -82,7 +93,8 @@ const controller = {
             if (city) {
                 res.status(200).json({
                     success: true,
-                    message: "The city was successfully modified"
+                    message: "The city was successfully modified",
+                    data: city
                 })
             } else {
                 res.status(404).json({
@@ -104,7 +116,8 @@ const controller = {
             if (city) {
                 res.status(200).json({
                     success: true,
-                    message: "the city is removed"
+                    message: "the city is removed",
+                    data: city
                 })
             } else {
                 res.status(404).json({
