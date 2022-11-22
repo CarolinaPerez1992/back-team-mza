@@ -14,14 +14,12 @@ const schema = joi.object({
         'any.required': 'Continent is required',
     }),
     photo: joi.string().required().uri().messages({
-        'string.empty': 'Photo must be at least 3 characters long',
-        'string.uri': 'Photo must be at most 50 charecters long',
+        'string.empty': 'Photo is required',
+        'string.uri': 'Photo does not have url format',
         'any.required': 'Photo is required',
     }),
-    population: joi.number().required().min(15000).max(300000).messages({
+    population: joi.number().required().messages({
         'number.empty': 'Population is required',
-        'number.min': 'Population must be at least 15000 characters long',
-        'number.max': 'Population must be at most 300000 charecters long',
         'any.required': 'Population is required',
     }),
     userId: joi.string().required().messages({
