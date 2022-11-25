@@ -2,7 +2,7 @@ const User = require('../models/User')
 const bcryptjs = require('bcryptjs') //de esta libreria vamos a utilizar el método hashSync para encriptar la contraseña
 const crypto = require('crypto')//de este modulo vamos a requerir el método randomBytes
 const accountVerificationEmail = require('../middlewares/accountVerificationEmail')
-const { userSignedUpResponse } = require('../config/response')
+const { userSignedUpResponse, userNotFoundResponse } = require('../config/response')
 
 const controlador = {
 
@@ -10,34 +10,42 @@ const controlador = {
         //método para que un usuario se registre
         //luego de pasar por todas las validaciones:
             //desestructura el cuerpo
-            let { name , lastName ,role, photo, age, email, password} = req.body
+            let { name , lastName ,photo, age, email, password} = req.body
+            let role = "user"
             //define las propiedades "extras" que necesite (online, codigo y verificado)
             let verified = false //por default es false
             let logged = false
             let code = crypto.randomBytes(10).toString('hex')//randomBytes es el id del moongose
             //encripto o hasheo la contraseña
-            contraseña = bcryptjs.hashSync(contraseña,10)//encripto contraseña ccon la libreia//el 10 grado de seguridad
-            console.log(contraseña)     
+            password = bcryptjs.hashSync(password,10)//encripto contraseña ccon la libreia//el 10 grado de seguridad
+            console.log(password)     
         try { //crea el usuario
            
             await User.create({ name , lastName ,role, photo, age, email, password, verified , logged , code })
             //envía mail de verificación (con transportador)
-            await accountVerificationEmail(mail,code)
+            await accountVerificationEmail(email,code)
             return userSignedUpResponse(req,res)
         } catch(error) {
             next(error)
         }
     },
 
-    verificar: async(req,res,next) => {
+    check: async(req,res,next) => {
         //método para que un usuario verifique su cuenta
         //requiere por params el código a verificar
         //busca un usuario que coincida el código
         //y cambia verificado de false a true
             //si tiene éxito debe redirigir a alguna página (home, welcome, login)
             //si no tiene éxito debe responder con el error
-        try {
+        let { code } = req.params
 
+        try {
+            let user = await User.findOneAndUpdate({code: code}, {verified:true}, {new:true} )
+            if  (user){
+                return res.redirect("https://www.google.com/")
+            }else{ 
+                return userNotFoundResponse(req,res)
+            }
         } catch(error) {
             next(error)
         }

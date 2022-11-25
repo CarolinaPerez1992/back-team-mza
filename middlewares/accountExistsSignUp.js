@@ -1,10 +1,10 @@
-const user = require("../models/User");
-const { userExistsResponse } = require("../config/responses");
+const User = require("../models/User");
+const { userExistsResponse } = require("../config/response");
 
 async function accountExists(req, res, next) {
-    const User = await User.findOne({mail: req.body.mail})
+    const user = await User.findOne({email: req.body.email})
     if (user) {
-        userExistsResponse(req,res)
+       return userExistsResponse(req,res)
     }
     return next()
 }
