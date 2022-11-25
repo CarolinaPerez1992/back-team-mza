@@ -32,7 +32,7 @@ const schema = joi.object({
         'number.empy': 'Age is required',
         'number.min': 'You must be over 18 years old',
     }),
-    email: joi.string().required().email({minDomainSegments}).messeges({
+    email: joi.string().email({minDomainSegments:2}).required().messages({//.email({minDomainSegments:2})nombre y dominio
         'any.required': 'Email is required',
         'string.empy': 'Email is required',
         'string.email': 'Must be a valid email',

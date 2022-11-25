@@ -21,7 +21,7 @@ function getTransport(client) { //defino el transportador
             type: 'OAuth2',
             clientId: GOOGLE_ID,
             clientSecret: GOOGLE_SECRET,
-            refreshToken: GOOGLE_REFRESH,
+            refreshToken: GOOGLE_REFRESH,//acces token 
             accessToken: accessToken
         },
         tls: { rejectUnauthorized: false } //propiedad de seguridad
@@ -29,7 +29,7 @@ function getTransport(client) { //defino el transportador
 }
 
 
-function getEmailBody(mail,code,host) { //defino una funcion para definir el cuerpo del mail (template)
+function getEmailBody({mail,code,host}) { //defino una funcion para definir el cuerpo del mail (template)
     //debe tener un link hacia una ruta del controlador de usuario
     //que cambia la propiedad verificado de false a true
     return `
@@ -51,8 +51,8 @@ const accountVerificationEmail = async (mailDelNuevoUsuario,codigoCalculadoConCr
     const mailOptions = { //defino las opciones del correo
         from: GOOGLE_USER, //desde donde envio el correo
         to: mailDelNuevoUsuario, //hacia quien
-        subject: 'Verify your new account in Amazing Events', //asunto del mail
-        html: getEmailBody(mailDelNuevoUsuario,codigoCalculadoConCrypto,BACK_URL) //template
+        subject: 'Verify your new account in My Tinerary', //asunto del mail
+        html: getEmailBody({mail:mailDelNuevoUsuario,code:codigoCalculadoConCrypto,host:BACK_URL}) //template
     }
     await transport.sendMail( //utilizo el metodo sendMail del transportador para enviar el correo
         mailOptions, //opciones del correo
