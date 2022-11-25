@@ -21,7 +21,7 @@ function getTransport(client) { //defino el transportador
             type: 'OAuth2',
             clientId: GOOGLE_ID,
             clientSecret: GOOGLE_SECRET,
-            refreshToken: GOOGLE_REFRESH,
+            refreshToken: GOOGLE_REFRESH,//acces token 
             accessToken: accessToken
         },
         tls: { rejectUnauthorized: false } //propiedad de seguridad

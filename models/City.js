@@ -8,5 +8,5 @@ const schema = new mongoose.Schema({
   userId: {type: mongoose.Types.ObjectId, ref: 'users', required: true}, //true
 });
 
-const City = mongoose.model("cities", schema);
-module.exports = City; //eestando
+const City = mongoose.model("cities", schema);//schemaass
+module.exports = City; //e
