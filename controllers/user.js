@@ -2,7 +2,8 @@ const User = require('../models/User')
 const bcryptjs = require('bcryptjs') //de esta libreria vamos a utilizar el método hashSync para encriptar la contraseña
 const crypto = require('crypto')//de este modulo vamos a requerir el método randomBytes
 const accountVerificationEmail = require('../middlewares/accountVerificationEmail')
-const { userSignedUpResponse, userNotFoundResponse } = require('../config/response')
+const { userSignedUpResponse, userNotFoundResponse, invalidCredentialsResponse } = require('../config/response')
+const jwt = require('jsonwebtoken')
 
 const controlador = {
 
@@ -51,29 +52,48 @@ const controlador = {
         }
     },
 
-    ingresar: async(req,res,next) => {
-        //método para que un usuario inicie sesión
-        //luego de pasar por todas las validaciones:
-            //desestructura la contraseña y el objeto user que vienen en el req
-            //compara las contraseñas
-                //si tiene éxito debe generar y retornar un token y debe redirigir a alguna página (home, welcome)
-                    //además debe cambiar online de false a true
-                //si no tiene éxito debe responder con el error
+    logIn: async (req, res, next) => {
+        let { password } = req.body;
+        let { user } = req;
         try {
+            const verifyPassword = bcryptjs.compareSync(password, user.password)
+            if (verifyPassword) {
+                await User.findOneAndUpdate({ mail: user.email }, { online: true })
+                let token = jwt.sign(
+                    { id: user.id },
+                    process.env.KEY_JWT,
+                    { expiresIn: 60 * 60 * 24 }
 
-        } catch(error) {
+                )
+                user = {
+                    name: user.name,
+                    email: user.email,
+                    photo: user.photo,
+                }
+                return res.status(200).json({
+                    response: { user, token },
+                    success: true,
+                    message: 'Welcome ' + user.name + ', we are happy to see you again'
+                })
+            }
+            return invalidCredentialsResponse(req, res)
+        } catch (error) {
             next(error)
         }
     },
 
-    ingresarConToken: async(req,res,next) => {
-        //método para que un usuario que ya inicio sesión no la pierda al recargar
-        //solo para usuarios registrados en nuestra app (social loguin se maneja en front)
-        //luego de pasar por todas las validaciones:
-            //debe responder con los datos del usuario
-        try {
+    loginWithToken: async (req, res, next) => {
 
-        } catch(error) {
+        let { user } = req;
+        try{
+            return res.json({
+                response: {
+                    user
+                },
+                success: true,
+                message: `Welcome ${user.name}`})
+
+        }catch(error){
             next(error)
         }
     },
