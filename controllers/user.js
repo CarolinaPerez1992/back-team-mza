@@ -110,60 +110,57 @@ const controlador = {
         }
 
     },
+    readOne: async (req, res, next) => {
+        let id = req.params.id;
+        try {
+            let user = await User.findById({ _id: id })
+            if (user) {
+                res.status(200).json({
+                    success: true,
+                    message: 'the user was found successfully!.',
+                    data: user,
+                })
+            } else {
+                res.status(404).json({
+                    success: false,
+                    message: 'the user was not found.',
+                })
+            }
+        } catch (error) {
+            next(error)
+        }
+    },
+
+    update: async (req, res, next) => {
+        let id = req.params.id;
+        if (req.body.password) {
+            let { password } = req.body;
+            password = bcryptjs.hashSync(password, 10);
+            req.body.password = password;
+        }
+
+
+        try {
+            let user = await User.findOneAndUpdate({ _id: id }, req.body, { new: true });
+
+            if (user) {
+                res.status(200).json({
+                    success: true,
+                    message: "The user was successfully modified!",
+                    data: user,
+                });
+            } else {
+                res.status(404).json({
+                    success: false,
+                    message: "The user was not found",
+                });
+            }
+        } catch (error) {
+            next(error)
+        }
+
+}
 }
 
 
 module.exports = controlador
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const User = require('../models/User');
-
-// const controller = {
-
-//     create: async (req, res) => {
-//         try {         
-//             let new_user = await User.create(req.body);
-//             res.status(201).json(
-//                 {
-//                 id: new_user._id,
-//                 success: true,
-//                 message: 'User created successfully'
-//                 }
-//             )
-//         } catch (error) {
-//             res.status(400).json({
-//                 success: false,
-//                 message: error.message
-//             })
-//         }
-//     },
-// }
-
-// module.exports = controller;
-
