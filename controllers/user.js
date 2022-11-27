@@ -2,8 +2,9 @@ const User = require('../models/User')
 const bcryptjs = require('bcryptjs') //de esta libreria vamos a utilizar el método hashSync para encriptar la contraseña
 const crypto = require('crypto')//de este modulo vamos a requerir el método randomBytes
 const accountVerificationEmail = require('../middlewares/accountVerificationEmail')
-const { userSignedUpResponse, userNotFoundResponse, invalidCredentialsResponse } = require('../config/response')
+const { userSignedUpResponse, userNotFoundResponse, invalidCredentialsResponse, userSignedOutResponse } = require('../config/response')
 const jwt = require('jsonwebtoken')
+
 
 const controlador = {
 
@@ -69,6 +70,7 @@ const controlador = {
                     name: user.name,
                     email: user.email,
                     photo: user.photo,
+                    role: user.role //lo agregamos 
                 }
                 return res.status(200).json({
                     response: { user, token },
@@ -98,19 +100,18 @@ const controlador = {
         }
     },
 
-    salir: async(req,res,next) => {
-        //método para que un usuario cierre sesión (cambia online de true a false)
-        //solo para usuarios registrados en nuestra app (social logout se maneja en front)
-                //si tiene éxito debe debe cambiar online de true a false
-                //si no tiene éxito debe responder con el error
+    signoff: async (req, res,next) => {
+        let { user } = req;
         try {
-
-        } catch(error) {
+            let userLogout = await User.findOneAndUpdate({ mail: user.email }, { logged: false }, { new: true })
+            return userSignedOutResponse(req, res)
+        } catch (error) {
             next(error)
         }
-    }
 
+    },
 }
+
 
 module.exports = controlador
 

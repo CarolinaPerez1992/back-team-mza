@@ -8,8 +8,8 @@ const schema = joi.object({
     .messages({
         'any.required': 'Name is required',
         'string.empy': 'Name is required',
-        'string.min': 'A minimun be at most 30 charecters requested',
-        'string.max': 'A maximum be at most 30 charecters requested',
+        'string.min': 'A minimun be at most 3 charecters requested',
+        'string.max': 'A maximum be at most 50 charecters requested',
         }),
     lastName: joi.string()
     .required()
@@ -18,8 +18,8 @@ const schema = joi.object({
     .messages({
         'any.required': 'Name is required',
         'string.empy': 'Name is required',
-        'string.min': 'A minimun be at most 30 charecters requested',
-        'string.max': 'A maximum be at most 30 charecters requested',
+        'string.min': 'A minimun be at most 5 charecters requested',
+        'string.max': 'A maximum be at most 7 charecters requested',
     }),
     role: joi.string().valid("user", "admin"),
     photo: joi.string().required().uri().messages({
