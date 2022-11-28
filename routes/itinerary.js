@@ -5,7 +5,7 @@ const validator = require ("../middlewares/validator")
 const schema = require ("../schemas/itinerary")
 
 router.get('/', readItineraries)
-router.post('/',passport.authenticate('jwt', { session:false }), validator (schema) , create)
+router.post('/', validator (schema) , create)
 router.put('/:id',passport.authenticate('jwt', { session:false }), update)
 router.delete('/:id',passport.authenticate('jwt', { session:false }), destroy)
 
