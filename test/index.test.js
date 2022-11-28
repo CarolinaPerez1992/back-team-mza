@@ -82,3 +82,16 @@ describe("DELETE /api/cities/:id", function () {
       });
   });
 })
+
+it('The city was removed', function (done) {
+  let hotelId = "63702ff85ef69e08afc128e4"
+  token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODE0YWU3YTFlMWVmMjlhMmQwNDNmNCIsImlhdCI6MTY2OTY0MDkwOSwiZXhwIjoxNjY5NzI3MzA5fQ.CtZ_ieXsmIMe5WJgnRxQ1DnAu_witZMvWz-QFczlSyQ"
+  request(app)
+      .delete(`/api/hotels/${hotelId}`)
+      .auth(token, { type: "bearer" })
+      .expect(200 )
+      .end(function (err, res) {
+          if (err) return done(err);
+          done()
+      })
+})
