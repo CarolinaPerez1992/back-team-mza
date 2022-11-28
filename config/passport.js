@@ -17,6 +17,7 @@ passport.use(
                 if (user) {
                     user = { //este es el objeto user que se "inyecta" al req
                         //aqui es donde protejo los datos del usuario
+                        id:user.id,
                         name: user.name,
                         lastName: user.lastName,
                         photo: user.photo,
