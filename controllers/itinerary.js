@@ -41,6 +41,7 @@ const controller = {
         id: new_itinerary._id,
         success: true,
         message: "Itinerary created successfully",
+        data: new_itinerary, //
       });
     } catch (error) {
       res.status(400).json({
@@ -52,20 +53,25 @@ const controller = {
   update: async (req, res) => {
     let { id } = req.params;
     try {
-      let itineraries = await Itinerary.findOneAndUpdate(
-        { _id: id },
-        req.body,
-        { new: true }
-      );
-      if (itineraries) {
-        res.status(200).json({
-          success: true,
-          message: "The itinerary was successfully modified",
-        });
+      let itineraryUser = await Itinerary.findById(id)
+      if (itineraryUser.userId.equals(req.user.id)) {
+        let itinerary = await Itinerary.findOneAndUpdate({ _id: id }, req.body, { new: true });
+        if (itinerary) {
+          res.status(200).json({
+            success: true,
+            message: 'Itinerary updated successfully',
+            data: itinerary,
+          });
+        } else {
+          res.status(404).json({
+            success: false,
+            message: 'Itinerary not found',
+          });
+        }
       } else {
-        res.status(404).json({
+        res.status(401).json({
           success: false,
-          message: "There is no itinerary that matches",
+          message: "Unauthorized",
         });
       }
     } catch (error) {
@@ -75,6 +81,38 @@ const controller = {
       });
     }
   },
-};
+
+  destroy: async (req, res) => {
+    let { id } = req.params;
+    try {
+      let itineraryUser = await Itinerary.findById(id)
+      if (itineraryUser.userId.equals(req.user.id)) {
+        let itinerary = await Itinerary.findOneAndDelete({ _id: id });
+        if (itinerary) {
+          res.status(200).json({
+            success: true,
+            message: 'Itinerary deleted successfully',
+            data: itinerary,
+          });
+        } else {
+          res.status(404).json({
+            success: false,
+            message: 'Itinerary not found',
+          });
+        }
+      } else {
+        res.status(401).json({
+          success: false,
+          message: "Unauthorized"
+        })
+      }
+    } catch (error) {
+      res.status(400).json({
+        success: false,
+        message: error.message
+      })
+    }
+  },
+}
 
 module.exports = controller;
