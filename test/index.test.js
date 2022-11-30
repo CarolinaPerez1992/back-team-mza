@@ -68,11 +68,31 @@ describe("DELETE /api/cities", function () {//deletee
   it('The city was removed', function (done) {//agregamos
     let citiId = "636e9b452367c51ce27eb199"
     request(app)
-        .delete(`/api/cities/${citiId}`)
-        .expect(200 )
-        .end(function (err, res) {
-            if (err) return done(err);
-            done()
-        })
-  })
+ 
+      .delete("/api/cities/638366426546a1922ac4bc1f")
+      .auth(token, {type: "bearer"})
+      .expect((response) => {
+        assert.equal(response.status, 200);
+      })
+      .end(function (err, res) {
+        if (err) {
+          return done(err);
+        }
+        done();
+      });
+  });
 })
+
+it('The city was removed', function (done) {
+  let hotelId = "63702ff85ef69e08afc128e4"
+  token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODE0YWU3YTFlMWVmMjlhMmQwNDNmNCIsImlhdCI6MTY2OTY0MDkwOSwiZXhwIjoxNjY5NzI3MzA5fQ.CtZ_ieXsmIMe5WJgnRxQ1DnAu_witZMvWz-QFczlSyQ"
+  request(app)
+      .delete(`/api/hotels/${hotelId}`)
+      .auth(token, { type: "bearer" })
+      .expect(200 )
+      .end(function (err, res) {
+          if (err) return done(err);
+          done()
+      })
+})
+

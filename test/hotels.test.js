@@ -59,3 +59,15 @@ describe("hotels", function (done) {
       });
   });
 });
+it('The hotel was removed', function (done) {
+  token = ""
+  let hotelId = "6384557ca9665972cdced228"
+  request(app)
+      .delete(`/api/hotels/${hotelId}`)
+      .auth(token, { type: "bearer" })
+      .expect(200 )
+      .end(function (err, res) {
+          if (err) return done(err);
+          done()
+      })
+})
