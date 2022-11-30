@@ -44,7 +44,7 @@ const controlador = {
         try {
             let user = await User.findOneAndUpdate({code: code}, {verified:true}, {new:true} )
             if  (user){
-                return res.redirect("https://www.google.com/")
+                return res.redirect('https://media.giphy.com/media/ASd0Ukj0y3qMM/giphy.gif')
             }else{ 
                 return userNotFoundResponse(req,res)
             }
@@ -59,19 +59,19 @@ const controlador = {
         try {
             const verifyPassword = bcryptjs.compareSync(password, user.password)
             if (verifyPassword) {
-                await User.findOneAndUpdate({ mail: user.email }, { online: true })
+                await User.findOneAndUpdate({ email: user.email }, { logged: true })
                 let token = jwt.sign(
                     { id: user.id },
                     process.env.KEY_JWT,
-                    { expiresIn: 60 * 60 * 24 }
+                    { expiresIn: 60 * 60 * 365 }
                     
                 )
                 user = {
                     id: user._id,
                     name: user.name,
-                    role: user.role,
                     email: user.email,
                     photo: user.photo,
+                    role: user.role,
                 }
                 return res.status(200).json({
                     response: { user, token },
@@ -102,9 +102,9 @@ const controlador = {
     },
 
     exit: async (req, res,next) => {
-        let { user } = req;
+        let { email } = req.user
         try {
-            let userLogout = await User.findOneAndUpdate({ mail: user.email }, { logged: false }, { new: true })
+            await User.findOneAndUpdate({ email }, { logged: false }, { new: true })
             return userSignedOutResponse(req, res)
         } catch (error) {
             next(error)
