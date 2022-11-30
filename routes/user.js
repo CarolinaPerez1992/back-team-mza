@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const schema  = require('../schemas/user');
 const validator = require('../middlewares/validator')
-const {register, check, logIn, signoff, loginWithToken, readOne, update} = require('../controllers/user');
+const {register, check, logIn, loginWithToken, readOne, update, exit} = require('../controllers/user');
 const {accountExists} = require ("../middlewares/accountExistsSignUp")
 const accountExistsSignIn = require ("../middlewares/accountExistsSignIn")
 const schemaSignIn = require('../schemas/signin')
@@ -11,7 +11,7 @@ const mustSignIn = require('../middlewares/mustSignIn')
 
 router.post('/sign-up',validator(schema)  , accountExists, register)
 router.post('/sign-in', validator(schemaSignIn), accountExistsSignIn, accountHasBeenVerified, logIn)
-router.post("/sign-out", passport.authenticate("jwt",{session:false}), signoff)
+router.post("/sign-out", passport.authenticate("jwt",{session:false}), exit)
 router.get('/me/:id', readOne)
 router.patch('/me/:id', update)
 

@@ -23,7 +23,7 @@ const controlador = {
             console.log(password)     
         try { //crea el usuario
            
-            await User.create({ name , lastName ,role, photo, age, email, password, verified , logged , code })
+            await User.create({ name , lastName , role, photo, age, email, password, verified , logged , code })
             //envía mail de verificación (con transportador)
             await accountVerificationEmail(email,code)
             return userSignedUpResponse(req,res)
@@ -49,7 +49,7 @@ const controlador = {
                 return userNotFoundResponse(req,res)
             }
         } catch(error) {
-            next(error)
+            next(error)//sirce para pasar a otro midlweare
         }
     },
 
@@ -64,13 +64,14 @@ const controlador = {
                     { id: user.id },
                     process.env.KEY_JWT,
                     { expiresIn: 60 * 60 * 24 }
-
+                    
                 )
                 user = {
+                    id: user._id,
                     name: user.name,
+                    role: user.role,
                     email: user.email,
                     photo: user.photo,
-                    role: user.role //lo agregamos 
                 }
                 return res.status(200).json({
                     response: { user, token },
@@ -100,7 +101,7 @@ const controlador = {
         }
     },
 
-    signoff: async (req, res,next) => {
+    exit: async (req, res,next) => {
         let { user } = req;
         try {
             let userLogout = await User.findOneAndUpdate({ mail: user.email }, { logged: false }, { new: true })

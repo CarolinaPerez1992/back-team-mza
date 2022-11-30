@@ -8,7 +8,7 @@ let itineraries = [
             "https://cdn2.civitatis.com/argentina/mendoza/galeria/vistas-vuelo-parapente-mendoza.jpg",
         ],
         description:
-            "During the paragliding flight you will experience a mixture of adrenaline and visual pleasure where apart from the thrill of flying you will be able to enjoy a unique view of the city of Mendoza and the foothills of the Andes with its incredible snow-capped peaks.",
+            "During the paragliding flight you will experience a mixture of adrenaline and visual pleasure where apart from the thriñll of flying",
         price: 110,
         duration: 2,
         userId: "636e786d2ebb17b28fb470a0",
@@ -22,7 +22,7 @@ let itineraries = [
             "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/25/2c/88/3e/tour-de-bodegas-medio.jpg?w=1200&h=-1&s=1",
         ],
         description:
-            "Delve deeper into Mendoza’s world-famous wine culture on half-day tasting tour that’s ideal is you’re pressed for time. You’ll visit several wineries to sample locally-grown varietals and discover what makes a great wine, without having to worry about driving between stops—instead, you can soak up views of rolling vineyards.",
+            "Delve deeper into Mendoza’s world-famous wine culture on half-day tasting tour that’s ideal is you’re pressed for time. You’ll visit several wineries to sample locally-grown varietals and discover what makes a great wine", 
         price: 42,
         duration: 6,
         userId: "636e786d2ebb17b28fb470a0",
@@ -92,7 +92,7 @@ let itineraries = [
             "https://aws-tiqets-cdn.imgix.net/images/content/2242bb814c744211aa33fd9ccdfc607f.JPG?auto=format&fit=crop&h=800&ixlib=python-3.2.1&q=70&w=800&s=14141102d5770d17120e9147d1c8ff54&dpr=1.25",
         ],
         description:
-            "There are many museums in the world, but none is like the Louvre. With more than 35,000 pieces on display, its collection of Renaissance masterpieces, antique objects and neoclassical art makes it the most visited museum in the world.",
+            "There are many museums in the world, but none is like the Louvre. With more than 35,000 pieces on display, its collection of Renaissance masterpieces, antique objects and neoclassical art.",
         price: 15,
         duration: 3,
         userId: "636e78d32ebb17b28fb470a4",
@@ -106,7 +106,7 @@ let itineraries = [
             "https://media.tacdn.com/media/attractions-splice-spp-674x446/07/81/54/5e.jpg",
         ],
         description:
-            "Make the most of your visit to one of the world's most popular monuments on a guided tour of the Eiffel Tower. Hear about the history and legends behind the icon of Paris as your guide escorts you to the second level, where panoramic views of the city await.",
+            "Make the most of your visit to one of the world's most popular monuments on a guided tour of the Eiffel Tower. Hear about the history and legends behind the icon of Paris.",
         price: 43,
         duration: 1,
         userId: "636e78d32ebb17b28fb470a4",
@@ -120,7 +120,7 @@ let itineraries = [
             "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/67/12/52/clock-tower-bar-crawl.jpg?w=1100&h=-1&s=1",
         ],
         description:
-            "Travelers looking for a fun night out in Prague will love this pub crawl. You'll enjoy the best of the city's nightlife without the risk of getting lost or wasting time waiting in line. Get to know your fellow travelers quickly about drinking games. At the first bar you'll get unlimited beer, wine, and sangria, and later you'll get two welcome shots.",
+            "Travelers looking for a fun night out in Prague will love this pub crawl. You'll enjoy the best of the city's nightlife without the risk of getting lost or wasting time waiting in line.",
         price: 24,
         duration: 5,
         userId: "636e78d32ebb17b28fb470a4",
@@ -134,7 +134,7 @@ let itineraries = [
             "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/0b/e1/1b/6f.jpg",
         ],
         description:
-            "See all of Prague's essential sights in just one day on this tour that takes you from the heights of Charles Bridge and Prague Castle to the Old Town, Lesser Town and Jewish Quarter, learning about the fascinating history of the city on the way. After lunch at a carefully selected Czech restaurant, get a different perspective on Prague's medieval landscape during a 1-hour cruise on the Vltava River.",
+            "See all of Prague's essential sights in just one day on this tour that takes you from the heights of Charles Bridge and Prague Castle to the Old Town, Lesser Town and Jewish Quarter",
         price: 57,
         duration: 1,
         userId: "636e79162ebb17b28fb470a6",
@@ -148,7 +148,7 @@ let itineraries = [
             "https://sevillecityguide.com/images/plaza-de-toros-seville.jpg",
         ],
         description:
-            "The construction of the plaza, originally in wood, began in 1761. Since then it has been subjected to numerous reforms that have made it part of the history not only of bullfighting, but also of the city.",
+            "The construction of the plaza, originally in wood, began in 1761. Since then it has been subjected to numerous reforms that have made it part of the history not only of bullfighting",
         price: 8,
         duration: 1,
         userId: "636e79162ebb17b28fb470a6",

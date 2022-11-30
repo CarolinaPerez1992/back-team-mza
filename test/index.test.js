@@ -64,11 +64,11 @@ describe("POST /api/hotels", function () {
     });
 });
 
-describe("DELETE /api/cities/:id", function () {
-  let token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODEwMjQwODA2YjgzYjMyMjk5Mzk0NiIsIm5hbWUiOiJNZXNzaSIsInBob3RvIjoiaHR0cHM6Ly9wYnMudHdpbWcuY29tL21lZGlhL0UzQVgxc3FWVUFBSWk0Vi5qcGciLCJsb2dnZWQiOnRydWUsImlhdCI6MTY2OTU5NzgyMywiZXhwIjoxNjY5Njg0MjIzfQ.-JB_Dy68O0G0-atkma3AaabOgjGIZOS3kJkst0uSHsM";
-  it("It must be delete a city", function (done) {
+describe("DELETE /api/cities", function () {//deletee
+  it('The city was removed', function (done) {//agregamos
+    let citiId = "636e9b452367c51ce27eb199"
     request(app)
+ 
       .delete("/api/cities/638366426546a1922ac4bc1f")
       .auth(token, {type: "bearer"})
       .expect((response) => {
@@ -95,3 +95,4 @@ it('The city was removed', function (done) {
           done()
       })
 })
+
