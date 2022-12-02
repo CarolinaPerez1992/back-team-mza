@@ -45,11 +45,6 @@ const schema = joi.object({
             'any.required': 'Duration is required',
             'string.empty': 'Duration is required',
         }),
-    userId: joi.string()
-        .required()
-        .messages({
-            'any.required': 'User is required',
-        }),
 })
 
 module.exports = schema
