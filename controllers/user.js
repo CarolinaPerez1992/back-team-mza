@@ -13,7 +13,7 @@ const controlador = {
         //luego de pasar por todas las validaciones:
             //desestructura el cuerpo
             let { name , lastName ,photo, age, email, password} = req.body
-            let role = "user"
+            let role = "admin"
             //define las propiedades "extras" que necesite (online, codigo y verificado)
             let verified = false //por default es false
             let logged = false
