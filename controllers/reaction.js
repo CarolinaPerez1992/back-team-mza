@@ -31,6 +31,7 @@ const controller = {
         try {
             let reactions = await Reaction.find(query)
                 .populate({ path: 'userId', select: 'name lastName photo' })
+                .populate({ path: 'showId', select: 'name photo -_id' })
                 .populate({ path: 'itineraryId', select: 'name photo -_id' })
             if (reactions.length > 0) {
                 let lengthOfReactions = {}
@@ -39,7 +40,7 @@ const controller = {
                     lengthOfReactions,
                     data: reactions,
                     success: true,
-                    message: `All reactions found`,
+                    message: `All reactions`,
                 })
             } else {
                 res.status(404).json({
@@ -48,6 +49,7 @@ const controller = {
                     data: [],
                 });
             }
+
         } catch (error) {
             res.status(400).json({
                 success: false,
@@ -100,6 +102,7 @@ const controller = {
                 })
             }
         } catch (error) {
+            console.log(error)
             res.status(400).json({
                 message: error.message,
                 success: false
