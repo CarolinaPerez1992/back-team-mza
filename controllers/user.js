@@ -19,8 +19,7 @@ const controlador = {
             let logged = false
             let code = crypto.randomBytes(10).toString('hex')//randomBytes es el id del moongose
             //encripto o hasheo la contraseña
-            password = bcryptjs.hashSync(password,10)//encripto contraseña ccon la libreia//el 10 grado de seguridad
-            console.log(password)     
+            password = bcryptjs.hashSync(password,10)//encripto contraseña ccon la libreia//el 10 grado de seguridad   
         try { //crea el usuario
            
             await User.create({ name , lastName , role, photo, age, email, password, verified , logged , code })

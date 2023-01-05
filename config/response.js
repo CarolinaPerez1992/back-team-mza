@@ -47,19 +47,6 @@ function verifyResponse(req,res) {
     })
 }
 
-// function creatorResponse(req, res) {
-//     return res.status(401).json({
-//         success: false,
-//         message: 'You are not the creator of this activity'
-//     });
-// }
-
-// function fileNotFoundResponse(req, res) {
-//     return res.status(404).json({
-//         success: false,
-//         message: "Couldn't find the file",
-//     });
-// }
 const mustBeTheOwner = (req, res) => {
     return res.status(401).json({
         success: false,
