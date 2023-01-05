@@ -5,14 +5,14 @@ const controller = {
 
     create: async (req, res) => {
         let id = req.body.userId;
-        let { showId, comment, userId, date } = req.body;
+        let { showId, comment, userId, date, itineraryId } = req.body;
 
         try {
             let user = await User.findOne({ _id: id });
             userId = user._id;
 
             let comments = await (
-                await Comment.create({ showId, comment, userId, date })
+                await Comment.create({ showId, comment, userId, date, itineraryId })
             ).populate("userId", {
                 photo: 1,
                 name: 1,
@@ -36,6 +36,9 @@ const controller = {
         let query = {};
         if (req.query.showId) {
             query = { showId: req.query.showId };
+        }
+        if (req.query.itineraryId) {
+            query = { itineraryId: req.query.itineraryId };
         }
 
         try {
